@@ -168,7 +168,7 @@ const Books = () => {
                     {books.map((book) => (
                         <div
                             className="book-kontener"
-                            key={book._id}
+                            key={book.bookid}
                         >
                             <h1>{book.szerzo}</h1>
                             <h2>{book.cim}</h2>
@@ -178,7 +178,7 @@ const Books = () => {
                             <div className="book-kep">
                                 <img src={`./images/${book.kep}`} />
                             </div>
-                            <button onClick={() => megmutat(`${book._id}`)}>
+                            <button onClick={() => megmutat(`${book.bookid}`)}>
                                 Megnézem
                             </button>
                         </div>

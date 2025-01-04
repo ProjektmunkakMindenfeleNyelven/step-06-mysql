@@ -1,5 +1,5 @@
-// User model lekérése.
-const User = require('../models/User');
+// pool beállítása.
+const pool = require('../utils/dbConnect');
 
 // Általunk telepített npm-csomag
 const bcrypt = require('bcrypt');
@@ -29,17 +29,22 @@ exports.postRegister = async (req, res) => {
             });
         }
 
-        const letezoUser = await User.findOne({ email });
+        const letezoUser = await pool.query(
+            'SELECT * FROM users WHERE email = ?',
+            [email]
+        );
 
-        if (letezoUser) {
+        if (letezoUser[0].length !== 0) {
             return res.status(409).json({
                 msg: 'Ezzel az e-mail címmel már létezik felhasználó!',
             });
         }
 
         const hashedPassword = await bcrypt.hash(jelszo, 10);
-        const newUser = new User({ nev, email, jelszo: hashedPassword });
-        await newUser.save();
+        await pool.query(
+            'INSERT INTO users (nev, email, jelszo) VALUES (?, ?, ?)',
+            [nev, email, hashedPassword]
+        );
 
         return res.status(201).json({ msg: 'Sikeres regisztráció!' });
     } catch (error) {

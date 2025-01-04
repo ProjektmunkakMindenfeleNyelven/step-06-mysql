@@ -1,5 +1,5 @@
-// Book model lekérése.
-const Book = require('../models/Book');
+// pool beállítása.
+const pool = require('../utils/dbConnect');
 
 // Új könyv létrehozására szolgáló oldal lekérése és exportálása.
 exports.getUjkonyv = (req, res) => {
@@ -21,8 +21,10 @@ exports.postUjkonyv = async (req, res) => {
                 .json({ msg: 'Minden mező kitöltése kötelező!' });
         }
 
-        const newUjKonyv = new Book(req.body);
-        await newUjKonyv.save();
+        await pool.query(
+            'INSERT INTO books (cim, szerzo, ar, oldalszam, kep, tipus) VALUES (?, ?, ?, ?, ?, ?)',
+            [cim, szerzo, Number(ar), Number(oldalszam), kep, tipus]
+        );
 
         return res.status(201).json({ msg: 'Sikeres új könyv feltöltés!' });
     } catch (error) {

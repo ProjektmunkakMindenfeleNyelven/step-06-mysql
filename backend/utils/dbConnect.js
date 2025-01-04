@@ -1,8 +1,15 @@
 // Általunk telepített npm-csomag
-const mongoose = require('mongoose');
+const mysql = require('mysql2');
 
-// Csatlakozás kiépítése
-const dbConnection = mongoose.connect(process.env.MONGO_URI);
+// Pool létrehozása
+const pool = mysql
+    .createPool({
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DATABASE,
+    })
+    .promise();
 
 // Exportálás
-module.exports = dbConnection;
+module.exports = pool;

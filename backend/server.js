@@ -38,17 +38,7 @@ app.use('/konyvegyedifrontend', require('./routes/egyediFrontendRoutes'));
 app.use('/register', require('./routes/registerRoutes'));
 app.use('/login', require('./routes/loginRoutes'));
 
-// Adatbázis csatlakozás
-let dbconnection = require('./utils/dbConnect');
-
-dbconnection
-    .then(() => {
-        console.log('Sikeres adatbázis csatlakozás!');
-        // Szerveralkalmazás figyelőmódba állítása
-        app.listen(PORT, () => {
-            console.log(`http://localhost:${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.log(error.message);
-    });
+// Szerveralkalmazás figyelőmódba állítása
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+});

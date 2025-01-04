@@ -1,5 +1,5 @@
-// User model lekérése.
-const User = require('../models/User');
+// pool beállítása.
+const pool = require('../utils/dbConnect');
 
 // Általunk telepített npm-csomag
 const bcrypt = require('bcrypt');
@@ -15,20 +15,29 @@ exports.postLogin = async (req, res) => {
                 .json({ msg: 'Minden mezőt ki kell tölteni!' });
         }
 
-        const letezoUser = await User.findOne({ email });
+        const letezoUser = await pool.query(
+            'SELECT * FROM users WHERE email = ?',
+            [email]
+        );
 
-        if (!letezoUser) {
+        if (letezoUser[0].length === 0) {
             return res.status(401).json({
                 msg: 'Ezekkel az adatokkal nem létezik felhasználó!',
             });
         }
 
-        const jelszoEgyezes = await bcrypt.compare(jelszo, letezoUser.jelszo);
+        const jelszoEgyezes = await bcrypt.compare(
+            jelszo,
+            letezoUser[0][0].jelszo
+        );
 
         if (jelszoEgyezes) {
             return res
                 .status(201)
-                .json({ msg: 'Sikeres belépés!', isAdmin: letezoUser.isAdmin });
+                .json({
+                    msg: 'Sikeres belépés!',
+                    isAdmin: letezoUser[0][0].isAdmin,
+                });
         } else {
             return res
                 .status(403)

@@ -3,7 +3,7 @@ const express = require('express');
 const {
     getUjkonyv,
     postUjkonyv,
-} = require('../controllers/ujKonyRouteControllers');
+} = require('../controllers/ujKonyvRouteControllers');
 
 // Szerver "alias" létrehozása
 const router = express.Router();

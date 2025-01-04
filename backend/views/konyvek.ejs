@@ -25,10 +25,10 @@
                     <p>Oldalszám: <%= book.oldalszam %></p>
                     <p>Tipus: <%= book.tipus %></p>
                     <img src="/images/<%= book.kep %>" />
-                    <button onclick="modosit('<%= book._id %>')">
+                    <button onclick="modosit('<%= book.bookid %>')">
                         Módosít
                     </button>
-                    <button onclick="torol('<%= book._id %>')">Töröl</button>
+                    <button onclick="torol('<%= book.bookid %>')">Töröl</button>
                 </div>
                 <% }) %>
             </div>
