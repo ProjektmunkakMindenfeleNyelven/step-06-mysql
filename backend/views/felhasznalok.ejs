@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/stilus.css"
+        />
+        <title>Szerver Books Page</title>
+    </head>
+    <body>
+        <%- include('./nav.ejs') %>
+        <div id="felhasznalok-kontener">
+            <h1>Szerver Users Page</h1>
+            <div id="users-kontener">
+                <% users.forEach(user => { %>
+                <div class="user-kontener">
+                    <h2>Név: <%= user.nev %></h2>
+                    <h3>E-mail: <%= user.email %></h3>
+                    <% if (user.isAdmin === 1) { %>
+                    <h4>Admin: true</h4>
+                    <% } else { %>
+                    <h4>Admin: false</h4>
+                    <% } %>
+                    <button onclick="felhasznaloTorol('<%= user.userid %>')">
+                        Töröl
+                    </button>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <script src="/JS/felhasznalo-torol.js"></script>
+    </body>
+</html>

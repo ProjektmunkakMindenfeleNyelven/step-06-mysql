@@ -13,8 +13,11 @@
 -   [ ] **controllers/konyvModositRouteControllers.js** állomány átírása _mysql_-re
 -   [ ] **controllers/registerRouteControllers.js** állomány átírása _mysql_-re
 -   [ ] **controllers/loginRouteControllers.js** állomány átírása _mysql_-re
+-   [ ] **controllers/usersRouteControllers.js** állomány átírása _mysql_-re
+-   [ ] **views/felhasznalok.ejs** állomány átírása _mysql_-re
 
 # Frontend (Client Side)
 
 -   [ ] Lépjünk be a **frontend** mappába (Git Bash): `cd frontend`
 -   [ ] **src/pages/Books.jsx** állomány átírása _mysql_-re
+-   [ ] **src/pages/Login.jsx** állomány átírása _mysql_-re
