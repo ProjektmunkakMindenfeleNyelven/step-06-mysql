@@ -7,10 +7,12 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ProtectedRoutes from './ProtectedRoutes';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
         <BrowserRouter>
+		<ToastContainer />
             <Routes>
                 <Route element={<ProtectedRoutes />}>
                     <Route

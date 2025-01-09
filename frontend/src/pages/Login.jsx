@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
                 const valasz = await response.json();
 
                 if (response.ok) {
-                    window.alert(valasz.msg);
+                    localStorage.setItem('toasty', 1);
                     localStorage.setItem('isLoggedIn', 1);
                     if (valasz.isAdmin === 1) {
                         localStorage.setItem('isAdmin', 1);
@@ -30,7 +31,7 @@ const Login = () => {
                     }
                     window.location.href = '/';
                 } else {
-                    window.alert(valasz.msg);
+                    toast.error(valasz.msg);
                 }
             } catch (error) {
                 console.log(`Valami hiba történt: ${error.message}`);
